@@ -15,14 +15,20 @@
                         name: "iPhone 7",
                         value: "iPhone7",
                         orientations: ["portrait", "landscape"],
-                        colors: ["black", "white", "gold", "pink", "red"],
-                        aspectRatio: 0.5654669428620749,
+                        colors: ["black", "white"],
+                        aspectRatio: {
+                            portrait: 0.5654669428620749,
+                            landscape: 1.7686873508353222,
+                        },
                     },
                     {
                         name: "Pixel",
                         value: "Pixel",
                         orientations: ["portrait"],
                         colors: ["black", "white"],
+                        aspectRatio: {
+                            portrait: 0.5671345782356729,
+                        },
                     },
                 ],
             };

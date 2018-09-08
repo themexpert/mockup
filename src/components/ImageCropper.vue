@@ -1,5 +1,6 @@
 <template>
-    <div class="modal" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -12,7 +13,7 @@
                     <img ref="imageToCrop" class="image-to-crop" :src="localImage" alt="Image To Crop">
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" @click="cancel">Close</button>
                     <button type="button" class="btn btn-primary" @click="cropImage">Crop and Continue</button>
                 </div>
             </div>
@@ -29,16 +30,22 @@
             return {cropper: null}
         },
         mounted() {
-            this.cropper = new Cropper(this.$refs.imageToCrop, {
-                aspectRatio: this.aspectRatio,
-                viewMode: 1,
-                dragMode: 'move',
-                cropBoxMovable: false,
-                cropBoxResizable: false,
-            });
-            $('.modal').modal('show');
+            this.initiateCropper();
         },
         methods: {
+            initiateCropper() {
+                if (!this.$refs.imageToCrop) {
+                    return;
+                }
+                this.cropper = new Cropper(this.$refs.imageToCrop, {
+                    aspectRatio: this.aspectRatio,
+                    viewMode: 1,
+                    dragMode: 'move',
+                    cropBoxMovable: false,
+                    cropBoxResizable: false,
+                });
+                $('.modal').modal('show');
+            },
             cropImage() {
                 const canvas = this.cropper.getCroppedCanvas();
                 const img = canvas.toDataURL();
@@ -46,12 +53,27 @@
                 $('.modal').modal('hide');
                 this.$emit('imageCropped', img);
             },
+            cancel() {
+                this.cropper.destroy();
+                $('.modal').modal('hide');
+            },
         },
         computed: {
             localImage() {
                 return this.image;
             },
         },
+        watch: {
+            localImage: {
+                handler(a, b) {
+                    if (a !== b) {
+                        this.initiateCropper();
+                    }
+                },
+                immediate: true,
+            }
+        }
+        ,
     };
 </script>
 
