@@ -1,8 +1,6 @@
 <template>
-    <div>
-        <ul>
-            <li v-for="color in colors" :key="color" @click="$emit('setColor', color)" v-text="color"></li>
-        </ul>
+    <div class="btn-group mt-2" role="group" aria-label="Basic example">
+        <button class="btn btn-outline-secondary text-uppercase" v-for="color in colors" :key="color" @click="$emit('setColor', color)" v-text="color"></button>
     </div>
 </template>
 

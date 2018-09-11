@@ -1,19 +1,39 @@
 <template>
-    <div class="options-panel">
-        <OrientationPicker :orientations="orientations" @setOrientation="sendOrientation"/>
-
-        <ColorPicker :colors="colors" @setColor="sendColor"/>
-
-        <div class="upload-image">
-            <label for="upload" ref="upload">
-                <button @click="openFileDialog">Upload</button>
-            </label>
-            <input type="file" id="upload" accept="image/*" @change="fileSelected">
+    <div class="options-panel p-3">
+        <h3 class="mb-2">iPhone 7</h3>
+        <hr>
+        <div class="row">
+            <div class="col-md-6"><strong>Orientations</strong></div>
+            <div class="col-md-6"><OrientationPicker :orientations="orientations" @setOrientation="sendOrientation"/></div>
+        </div>
+        <div class="row">
+            <div class="col-md-6"><strong>Device Color</strong></div>
+            <div class="col-md-6"><ColorPicker :colors="colors" @setColor="sendColor"/></div>
         </div>
 
-        <div class="download-btn">
-            <button class="btn btn-primary" @click="downloadImage">Download</button>
+        <div class="card text-center my-3">
+          <div class="card-header">
+            <ul class="nav nav-pills card-header-pills">
+              <li class="nav-item">
+                <a class="nav-link active" href="#">Image</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled" href="#">Customize</a>
+              </li>
+            </ul>
+          </div>
+          <div class="card-body">
+            <div class="d-flex justify-content-between">
+                <label for="upload" ref="upload" class="w-50 mr-2">
+                    <button class="btn btn-primary btn-block" @click="openFileDialog">Upload</button>
+                </label>
+                <button class="btn btn-outline-secondary w-50">URL</button>
+                <input type="file" id="upload" accept="image/*" @change="fileSelected">
+            </div>
+          </div>
         </div>
+        
+        <button class="btn btn-outline-success btn-block" @click="downloadImage">Download</button>
     </div>
 </template>
 

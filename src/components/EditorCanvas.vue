@@ -1,5 +1,5 @@
 <template>
-    <div class="device-wrapper">
+    <div class="device-wrapper m-auto">
         <div class="device"
              :data-device="options.device"
              :data-orientation="options.orientation"

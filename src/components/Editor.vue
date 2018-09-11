@@ -1,31 +1,39 @@
 <template>
-    <div class="editor">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12" v-if="!device">
-                    <div class="card">
-                        <DeviceChooser @setDevice="setDevice"/>
+    <div>
+        <div v-if="!device">
+            <DeviceChooser @setDevice="setDevice"/>
+        </div>
+
+        <div class="editor bg-light" v-else>
+            <div class="jumbotron text-center mb-0">
+                <div class="container">
+                    <h1 class="jumbotron-heading">Build Your Mockup</h1>
+                </div>
+            </div>
+            <div class="eidtor-panel py-5">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card shadow-sm p-5 text-center">
+                                <EditorCanvas ref="viewport" :options="options" class="canvas"/>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card shadow-sm">
+                                <OptionsPanel
+                                  :orientations="device.orientations"
+                                  :colors="device.colors"
+                                  :offset-x="options.offsetX"
+                                  :offset-y="options.offsetY"
+                                  :scale="options.scale"
+                                  @downloadImage="downloadImage"
+                                  @set="set"/>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-12" v-else>
-                    <div class="card">
-                        <div class="col-md-8">
-                            <EditorCanvas ref="viewport" :options="options" class="canvas"/>
-                        </div>
-                        <div class="col-md-4">
-                            <OptionsPanel class="right-panel"
-                                          :orientations="device.orientations"
-                                          :colors="device.colors"
-                                          :offset-x="options.offsetX"
-                                          :offset-y="options.offsetY"
-                                          :scale="options.scale"
-                                          @downloadImage="downloadImage"
-                                          @set="set"/>
-                        </div>
-                        <ImageCropper v-if="shouldCrop" :image="image" :aspect-ratio="aspectRatio"
-                                      @imageCropped="imageCropped"/>
-                    </div>
-                </div>
+                <ImageCropper v-if="shouldCrop" :image="image" :aspect-ratio="aspectRatio"
+                          @imageCropped="imageCropped"/>
             </div>
         </div>
     </div>

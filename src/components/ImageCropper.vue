@@ -1,20 +1,17 @@
 <template>
     <div class="modal" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
          aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <h5 class="modal-title">Crop Image</h5>
                 </div>
                 <div class="modal-body">
                     <img ref="imageToCrop" class="image-to-crop" :src="localImage" alt="Image To Crop">
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" @click="cancel">Close</button>
-                    <button type="button" class="btn btn-primary" @click="cropImage">Crop and Continue</button>
+                    <button type="button" class="btn btn-outline-secondary" @click="cancel">Close</button>
+                    <button type="button" class="btn btn-success" @click="cropImage">Crop and Continue</button>
                 </div>
             </div>
         </div>
@@ -80,6 +77,7 @@
 <style scoped>
     .image-to-crop {
         max-width: 100%;
+        max-height: 450px;
     }
 
     .modal-body {
